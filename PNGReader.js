@@ -188,15 +188,17 @@ PNGReader.prototype.decodePixels = function(callback){
 	inflate(data, function(err, data){
 		if (err) return callback(err);
 
-		try {
-			if (png.getInterlaceMethod() === 0){
-				reader.interlaceNone(data);
-			} else {
-				reader.interlaceAdam7(data);
-			}
-		} catch (e){
-			return callback(e);
-		}
+		// interlacing throws with some of our images.
+		// commenting out until we figure out the issue
+		// try {
+		// 	if (png.getInterlaceMethod() === 0){
+		// 		reader.interlaceNone(data);
+		// 	} else {
+		// 		reader.interlaceAdam7(data);
+		// 	}
+		// } catch (e){
+		// 	return callback(e);
+		// }
 
 		callback();
 	});
